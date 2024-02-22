@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_mobx: ^2.2.0+2
   mobx: ^2.3.0+1
-  mobx_codegen: ^2.6.0+1
   hive: ^2.2.3
   uuid: ^4.3.3
   get_it: ^7.6.7
@@ -53,11 +52,20 @@ dependencies:
   package_info_plus: ^4.2.0
   skeletonizer: ^1.0.1
   cached_network_image: ^3.3.1
+  hive_flutter: ^1.1.0
+  go_router: ^13.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.3
+  mobx_codegen: ^2.6.0+1
+
+  # Comando build runner para gerar arquivos .g.dart
+  # flutter packages pub run build_runner build
+
+  # Comando para ficar ativo o build runner
+  # flutter packages pub run build_runner watch
 
   # flutter_launcher_icons:
   #   #   #1 - flutter clean
@@ -98,6 +106,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+  build_runner: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

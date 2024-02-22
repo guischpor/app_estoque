@@ -17,10 +17,11 @@ class AppColors {
   static const Color grey = Color.fromRGBO(137, 136, 134, 1);
   static const Color yellow = Color.fromRGBO(202, 171, 106, 1);
   static const Color blue = Color.fromRGBO(126, 173, 237, 1);
+  static const Color blueLight = Color.fromRGBO(130, 159, 199, 1);
   static const Color orange = Color.fromRGBO(219, 158, 16, 1);
 
   //Colors Components
-  static const Color colorAppBarPink = Color.fromRGBO(209, 103, 144, 1);
+  static const Color colorAppBarBlue = Color.fromRGBO(126, 173, 237, 1);
   static const Color scaffoldBackgroundColor = Color.fromRGBO(249, 249, 249, 1);
   static const Color inputTextBorder = Color.fromRGBO(141, 137, 133, 1);
   static const Color inputFocusedBorder = Color.fromRGBO(90, 79, 151, 1);
@@ -41,19 +42,19 @@ class AppColors {
   static const Color iconColorFavorites = Color.fromRGBO(237, 77, 77, 1);
   static const Color iconColorUserSettings = Color.fromRGBO(160, 175, 237, 1);
 
-  static const Map<int, Color> pinkPrimarySwatch = {
-    50: Color.fromRGBO(236, 104, 147, .1),
-    100: Color.fromRGBO(236, 104, 147, .2),
-    200: Color.fromRGBO(236, 104, 147, .3),
-    300: Color.fromRGBO(236, 104, 147, .4),
-    400: Color.fromRGBO(236, 104, 147, .5),
-    500: Color.fromRGBO(236, 104, 147, .6),
-    600: Color.fromRGBO(236, 104, 147, .7),
-    700: Color.fromRGBO(236, 104, 147, .8),
-    800: Color.fromRGBO(236, 104, 147, .9),
-    900: Color.fromRGBO(236, 104, 147, 1),
+  static const Map<int, Color> bluePrimarySwatch = {
+    50: Color.fromRGBO(126, 173, 237, 1),
+    100: Color.fromRGBO(126, 173, 237, 2),
+    200: Color.fromRGBO(126, 173, 237, 3),
+    300: Color.fromRGBO(126, 173, 237, 4),
+    400: Color.fromRGBO(126, 173, 237, 5),
+    500: Color.fromRGBO(126, 173, 237, 6),
+    600: Color.fromRGBO(126, 173, 237, 7),
+    700: Color.fromRGBO(126, 173, 237, 8),
+    800: Color.fromRGBO(126, 173, 237, 9),
+    900: Color.fromRGBO(126, 173, 237, 1),
   };
 
-  static const materialPink =
-      MaterialColor(0xFFec6893, AppColors.pinkPrimarySwatch);
+  static const materialBlue =
+      MaterialColor(0xFF7EADED, AppColors.bluePrimarySwatch);
 }

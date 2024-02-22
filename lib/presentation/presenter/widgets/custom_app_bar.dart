@@ -1,16 +1,18 @@
 import 'custom_image.dart';
 import 'transform_widget_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/styles/app_color.dart';
+
 
 AppBar customAppBar({
   bool isLeading = true,
   Widget? widget,
   bool? centerTitle = true,
   List<Widget>? actions,
-  Color? backgroundColor = AppColors.colorAppBarPink,
-  Color? splashColor = AppColors.pink,
-  Color? leadingBackgroundColor = AppColors.pinkLight,
+  Color? backgroundColor = AppColors.colorAppBarBlue,
+  Color? splashColor = AppColors.blue,
+  Color? leadingBackgroundColor = AppColors.blueLight,
   Color? shadowColor,
   double? toolbarHeight = 70,
   double? elevation,
@@ -30,7 +32,7 @@ AppBar customAppBar({
               backgroundColor: leadingBackgroundColor,
               splashColor: splashColor,
               onTap: () {
-                Navigator.pop(context);
+                context.pop();
               },
               child: Container(
                 decoration: BoxDecoration(

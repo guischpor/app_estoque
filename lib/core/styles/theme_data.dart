@@ -4,7 +4,7 @@ import 'package:app_estoque/core/styles/app_color.dart';
 
 class ThemeDataStyle {
   ThemeData get theme => ThemeData(
-        primarySwatch: AppColors.materialPink,
+        primarySwatch: AppColors.materialBlue,
         canvasColor: AppColors.white,
         scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
         useMaterial3: true,
