@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/styles/app_text_style.dart';
 
-
 // ignore: must_be_immutable
 class CustomTextButton extends StatelessWidget {
   CustomTextButton._({
@@ -17,7 +16,7 @@ class CustomTextButton extends StatelessWidget {
   TextStyle textStyle = AppTextStyle.robotoBlack18.font15.w700;
   final ButtonStyle? buttonStyle;
 
-  factory CustomTextButton.purple({
+  factory CustomTextButton.blue({
     required String title,
     required void Function() onTap,
     TextStyle? textStyle,
@@ -25,14 +24,14 @@ class CustomTextButton extends StatelessWidget {
     return CustomTextButton._(
       title: title,
       onTap: onTap,
-      textStyle: textStyle ?? AppTextStyle.nunitoPurple18.font15.w700,
+      textStyle: textStyle ?? AppTextStyle.nunitoBlueText18.font15.w700,
       buttonStyle: TextButton.styleFrom(
         foregroundColor: const Color.fromRGBO(30, 188, 211, 1),
       ),
     );
   }
 
-  factory CustomTextButton.pink({
+  factory CustomTextButton.black({
     required String title,
     required void Function() onTap,
     TextStyle? textStyle,
@@ -40,7 +39,7 @@ class CustomTextButton extends StatelessWidget {
     return CustomTextButton._(
       title: title,
       onTap: onTap,
-      textStyle: textStyle ?? AppTextStyle.nunitoPink18.font15.w700,
+      textStyle: textStyle ?? AppTextStyle.nunitoBlueText18.font15.w700,
       buttonStyle: TextButton.styleFrom(
         foregroundColor: Colors.transparent,
       ),

@@ -1,9 +1,7 @@
 import 'custom_image.dart';
 import 'transform_widget_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../../core/styles/app_color.dart';
-
 
 AppBar customAppBar({
   bool isLeading = true,
@@ -18,6 +16,7 @@ AppBar customAppBar({
   double? elevation,
   PreferredSizeWidget? bottom,
   required BuildContext context,
+  void Function()? onTap,
 }) {
   return AppBar(
     title: widget ??
@@ -31,9 +30,7 @@ AppBar customAppBar({
             child: TransformWidgetButton(
               backgroundColor: leadingBackgroundColor,
               splashColor: splashColor,
-              onTap: () {
-                context.pop();
-              },
+              onTap: onTap!,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.transparent,

@@ -1,7 +1,6 @@
+import 'app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'app_color.dart';
 
 abstract class AppTextStyle {
   static TextStyle get fontRobotoblack18 => GoogleFonts.roboto(
@@ -27,6 +26,8 @@ abstract class AppTextStyle {
       fontRobotoblack18.copyWith(color: AppColors.pink);
   static TextStyle get robotoPurple18 =>
       fontRobotoblack18.copyWith(color: AppColors.purple);
+  static TextStyle get robotoBlue18 =>
+      fontRobotoblack18.copyWith(color: AppColors.blue);
 
   static TextStyle get nunitotBlack18 =>
       fontNunitoblack8.copyWith(color: AppColors.black);

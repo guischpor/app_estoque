@@ -6,10 +6,32 @@ class LoginController = LoginBase with _$LoginController;
 
 abstract class LoginBase with Store {
   @observable
-  String email = 'teste@gmail.com';
+  bool isLoading = false;
+
+  @observable
+  bool isObscure = true;
+
+  @observable
+  bool isChecked = false;
+
+  @observable
+  String email = '';
+
+  @observable
+  String password = '';
 
   @action
-  setEmail(String value) {
-    email = value;
+  setLoading(bool value) {
+    isLoading = value;
+  }
+
+  @action
+  void setObscure() {
+    isObscure = !isObscure;
+  }
+
+  @action
+  void setChecked(bool? value) {
+    isChecked = value ?? false;
   }
 }

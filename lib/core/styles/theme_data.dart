@@ -19,7 +19,7 @@ class ThemeDataStyle {
           labelStyle: AppTextStyle.robotoGrey18.font15,
           border: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: AppColors.inputFocusedBorder,
+              color: AppColors.blueLight,
               style: BorderStyle.solid,
             ),
             borderRadius: BorderRadius.all(
@@ -45,7 +45,7 @@ class ThemeDataStyle {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: AppColors.inputFocusedBorder,
+              color: AppColors.blueLight,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -56,7 +56,7 @@ class ThemeDataStyle {
               return AppColors.grey;
             }
             if (states.contains(MaterialState.selected)) {
-              return AppColors.pink;
+              return AppColors.blue;
             }
             return AppColors.white;
           }),
@@ -64,7 +64,7 @@ class ThemeDataStyle {
             return AppColors.white;
           }),
           side: const BorderSide(
-            color: AppColors.pink,
+            color: AppColors.blue,
           ),
           materialTapTargetSize: MaterialTapTargetSize.padded,
         ),
