@@ -12,3 +12,7 @@ abstract class CustomServerException implements Exception {
 class ServerBadRequest extends CustomServerException {
   ServerBadRequest() : super('Erro interno!.');
 }
+
+class BoxNotFound extends CustomServerException {
+  BoxNotFound() : super('Box não encontrado!.');
+}

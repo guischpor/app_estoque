@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/styles/app_text_style.dart';
 
-
 SnackBar showSnackBarDialog({
   required String label,
   required String title,

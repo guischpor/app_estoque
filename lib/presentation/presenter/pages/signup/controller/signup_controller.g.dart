@@ -25,6 +25,22 @@ mixin _$SignUpController on SignUpBase, Store {
     });
   }
 
+  late final _$isSuccessAtom =
+      Atom(name: 'SignUpBase.isSuccess', context: context);
+
+  @override
+  bool get isSuccess {
+    _$isSuccessAtom.reportRead();
+    return super.isSuccess;
+  }
+
+  @override
+  set isSuccess(bool value) {
+    _$isSuccessAtom.reportWrite(value, super.isSuccess, () {
+      super.isSuccess = value;
+    });
+  }
+
   late final _$isObscureAtom =
       Atom(name: 'SignUpBase.isObscure', context: context);
 
@@ -136,15 +152,44 @@ mixin _$SignUpController on SignUpBase, Store {
     });
   }
 
+  late final _$createUserAsyncAction =
+      AsyncAction('SignUpBase.createUser', context: context);
+
+  @override
+  Future<void> createUser(
+      {required String name,
+      required String cpf,
+      required String email,
+      required String password,
+      required BuildContext context}) {
+    return _$createUserAsyncAction.run(() => super.createUser(
+        name: name,
+        cpf: cpf,
+        email: email,
+        password: password,
+        context: context));
+  }
+
   late final _$SignUpBaseActionController =
       ActionController(name: 'SignUpBase', context: context);
 
   @override
-  dynamic setLoading(bool value) {
+  void setLoading(bool value) {
     final _$actionInfo =
         _$SignUpBaseActionController.startAction(name: 'SignUpBase.setLoading');
     try {
       return super.setLoading(value);
+    } finally {
+      _$SignUpBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSuccess(bool value) {
+    final _$actionInfo =
+        _$SignUpBaseActionController.startAction(name: 'SignUpBase.setSuccess');
+    try {
+      return super.setSuccess(value);
     } finally {
       _$SignUpBaseActionController.endAction(_$actionInfo);
     }
@@ -176,6 +221,7 @@ mixin _$SignUpController on SignUpBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+isSuccess: ${isSuccess},
 isObscure: ${isObscure},
 isPasswordConfirmationObscure: ${isPasswordConfirmationObscure},
 name: ${name},

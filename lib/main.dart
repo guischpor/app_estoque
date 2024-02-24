@@ -1,13 +1,17 @@
 import 'core/routes/page_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'core/hive_config/hive_config.dart';
 import 'core/dependencies/injection_dependencies.dart';
 import 'package:app_estoque/core/styles/theme_data.dart';
-import 'package:app_estoque/presentation/presenter/pages/login/view/login_page.dart';
 
-void main() {
-  InjectionDependencies();
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await HiveConfig.start();
+
+  injectionDependencies();
+  runApp(const MyApp());
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

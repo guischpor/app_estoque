@@ -15,3 +15,17 @@ class ServerFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class BoxNotFoundFailure extends Failure {
+  final String? msg;
+
+  BoxNotFoundFailure([this.msg]);
+
+  @override
+  String toString() {
+    return msg ?? 'Box não encontrado!';
+  }
+
+  @override
+  List<Object?> get props => [];
+}

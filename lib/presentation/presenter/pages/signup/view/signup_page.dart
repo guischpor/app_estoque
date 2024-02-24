@@ -39,10 +39,19 @@ class _SignUpPageState extends State<SignUpPage> {
       return;
     }
 
-    // await loginController.login(
-    //   _emailcontroller.text,
-    //   _passwordcontroller.text,
-    // );
+    signUpController.setLoading(true);
+
+    await signUpController.createUser(
+      name: _nameController.text,
+      cpf: _cpfController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      context: context,
+    );
+
+    if (signUpController.isSuccess) {
+      context.go(NamedRoutes.login);
+    }
   }
 
   @override
@@ -77,25 +86,28 @@ class _SignUpPageState extends State<SignUpPage> {
               context.go(NamedRoutes.login);
             },
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.sizeOf(context).longestSide * 0.04,
-                  ),
-                  child: const CustomImage(
-                    Assets.createAccount02,
-                    height: 200,
+          body: signUpController.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical:
+                              MediaQuery.sizeOf(context).longestSide * 0.04,
+                        ),
+                        child: const CustomImage(
+                          Assets.createAccount02,
+                          height: 200,
+                        ),
+                      ),
+                      _form()
+                    ],
                   ),
                 ),
-                _form()
-              ],
-            ),
-          ),
         );
       },
     );
