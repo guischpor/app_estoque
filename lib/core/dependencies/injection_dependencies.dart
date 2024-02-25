@@ -19,6 +19,7 @@ import 'package:app_estoque/presentation/data/repositories_impl/login_repository
 import 'package:app_estoque/presentation/domain/usecases/get_stock_product_usecase/get_stock_product_usecase.dart';
 import 'package:app_estoque/presentation/data/datasources/local/get_user_datasources/get_user_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/get_user_repository_impl/get_user_repository_impl.dart';
+import 'package:app_estoque/presentation/domain/usecases/update_stock_product_usecase/update_stock_product_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/delete_stock_product_usecase/delete_stock_product_usecase.dart';
 import 'package:app_estoque/presentation/data/datasources/local/create_sotck_datasources/create_sotck_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/check_logged_datasources/check_logged_datasource_impl.dart';
@@ -29,7 +30,9 @@ import 'package:app_estoque/presentation/data/datasources/local/remember_account
 import 'package:app_estoque/presentation/data/datasources/local/get_stock_product_datasources/get_stock_product_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/remember_account_repository_impl/remember_account_repository_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/get_stock_product_repository_impl/get_stock_product_repository_impl.dart';
+import 'package:app_estoque/presentation/data/datasources/local/update_stock_product_datasources/update_stock_product_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/delete_stock_product_datasources/delete_stock_product_datasource_impl.dart';
+import 'package:app_estoque/presentation/data/repositories_impl/update_stock_product_repository_impl/update_stock_product_repository_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/delete_stock_product_repository_impl/delete_stock_product_repository_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/get_all_stocks_products_datasources/get_all_stocks_products_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/get_all_stocks_products_repository_impl/get_all_stocks_products_repository_impl.dart';
@@ -47,6 +50,7 @@ void injectionDependencies() {
   getIt.registerFactory(() => GetAllStockProductsDataSourceImpl());
   getIt.registerFactory(() => DeleteStockProductDataSourceImpl());
   getIt.registerFactory(() => GetStockProductDataSourceImpl());
+  getIt.registerFactory(() => UpdateStockProductDataSourceImpl());
 
   //Repositories
   getIt.registerFactory(
@@ -73,6 +77,9 @@ void injectionDependencies() {
   getIt.registerFactory(() => GetStockProductRepositoryImpl(
         getIt<GetStockProductDataSourceImpl>(),
       ));
+  getIt.registerFactory(() => UpdateStockProductRepositoryImpl(
+        getIt<UpdateStockProductDataSourceImpl>(),
+      ));
 
   //UseCases
   getIt.registerFactory(() => SignUpUseCase(
@@ -92,6 +99,8 @@ void injectionDependencies() {
       DeleteStockProductUseCase(getIt<DeleteStockProductRepositoryImpl>()));
   getIt.registerFactory(
       () => GetStockProductUseCase(getIt<GetStockProductRepositoryImpl>()));
+  getIt.registerFactory(() =>
+      UpdateStockProductUseCase(getIt<UpdateStockProductRepositoryImpl>()));
 
   //Controllers
   getIt.registerFactory(() => LoginController(
@@ -117,6 +126,7 @@ void injectionDependencies() {
   getIt.registerFactory(() => StockController(
         createStockUseCase: getIt<CreateStockUseCases>(),
         getStockProductUseCase: getIt<GetStockProductUseCase>(),
+        updateStockProductUseCase: getIt<UpdateStockProductUseCase>(),
       ));
 
   getIt.registerFactory(() => HiveConfig());

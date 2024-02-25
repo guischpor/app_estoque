@@ -1,18 +1,18 @@
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
-import 'create_sotck_datasource.dart';
-import '../../../models/stock_model.dart';
+import 'update_stock_product_datasource.dart';
 import '../../../../../core/errors/server_exception.dart';
+import 'package:app_estoque/presentation/data/models/stock_model.dart';
+import 'package:app_estoque/presentation/domain/entities/stock_product.dart';
 
-class CreateStockDataSourceImpl implements CreateStockDataSource {
+class UpdateStockProductDataSourceImpl implements UpdateStockProductDataSource {
   @override
-  Future<Map<String, dynamic>> createStock(StockProductModel stock) async {
+  Future<StockProductEntity> updateStockProduct(StockProductModel stock) async {
     try {
       late Box box;
       box = await Hive.openBox('stocksProduct');
 
       final newStockProduct = StockProductModel(
-        id: const Uuid().v1(),
+        id: stock.id,
         unitStore: stock.unitStore,
         date: stock.date,
         userID: stock.userID,
@@ -22,12 +22,15 @@ class CreateStockDataSourceImpl implements CreateStockDataSource {
         product: stock.product,
       );
 
-      await box.put(
-        newStockProduct.id,
-        newStockProduct.toMap(),
-      );
+      final getAllKeys = box.keys.toList();
 
-      return box.get(newStockProduct.id);
+      getAllKeys.forEach((element) {
+        if (element == stock.id) {
+          box.putAt(getAllKeys.indexOf(element), newStockProduct.toMap());
+        }
+      });
+
+      return newStockProduct;
     } on HiveError catch (error) {
       if (error.message.contains('Box not found')) {
         throw BoxNotFound();

@@ -6,7 +6,7 @@ import 'package:app_estoque/presentation/presenter/widgets/transform_widget_butt
 import 'package:app_estoque/presentation/presenter/pages/home/widget/icon_panel_button.dart';
 
 class CardStockProduct extends StatefulWidget {
-  final DateTime date;
+  final String date;
   final String unitNameStore;
   final int statusID;
   final void Function()? onView;
@@ -54,7 +54,7 @@ class _CardStockProductState extends State<CardStockProduct> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.date.toStringDDMMYYYY(),
+                      DateTime.parse(widget.date).toStringDDMMYYYY(),
                       style: AppTextStyle.nunitotBlack18.font16,
                       softWrap: true,
                       overflow: TextOverflow.visible,

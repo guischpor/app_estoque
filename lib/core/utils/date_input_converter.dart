@@ -20,11 +20,11 @@ class DateInputConverter {
     return dateFormat;
   }
 
-  DateTime convertStringToFormDate(String date) {
+  String convertStringToFormDate(String date) {
     var dateSplited = date.toString().split('/');
     var dateFormated = '${dateSplited[2]}-${dateSplited[1]}-${dateSplited[0]}';
     var format = DateTime.parse(dateFormated);
-    return format;
+    return format.toIso8601String();
   }
 
   String formatDateUS(String date) {

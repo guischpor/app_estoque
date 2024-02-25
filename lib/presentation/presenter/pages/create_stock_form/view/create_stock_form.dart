@@ -125,6 +125,27 @@ class _CreateStockFormState extends State<CreateStockForm> {
     }
   }
 
+  Future<void> updateList() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    stockController.setLoading(true);
+
+    await stockController.updateStockProduct(
+      context: context,
+      unitStore: _unitStoreController.text,
+      date: _dateController.text,
+      userID: user.id!,
+      statusID: statusID!,
+      listID: widget.listID!,
+    );
+
+    if (stockController.isSuccess) {
+      context.go(NamedRoutes.home);
+    }
+  }
+
   void populateControllers(StockProductEntity stock) async {
     _unitStoreController.text = stock.unitStore == '' || stock.unitStore == null
         ? ''
@@ -132,7 +153,7 @@ class _CreateStockFormState extends State<CreateStockForm> {
 
     _dateController.text = stock.date == '' || stock.date == null
         ? ''
-        : stock.date!.toStringDDMMYYYY();
+        : DateTime.parse(stock.date!).toStringDDMMYYYY();
 
     statusID = stock.statusID;
     selectStatus = AppConst().statusList[stock.statusID!].status;
@@ -168,7 +189,9 @@ class _CreateStockFormState extends State<CreateStockForm> {
                     children: [
                       _form(),
                       CustomButton(
-                        onPressed: () async => await createList(),
+                        onPressed: () async => widget.isEdit == true
+                            ? await updateList()
+                            : await createList(),
                         label: widget.isEdit == true
                             ? 'EDITAR LISTA'
                             : 'CRIAR LISTA',

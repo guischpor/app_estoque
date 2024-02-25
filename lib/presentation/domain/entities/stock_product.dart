@@ -10,9 +10,9 @@ class StockProductEntity extends Equatable {
   String? userID;
   int? statusID;
   String? unitStore;
-  DateTime? date;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  String? date;
+  String? createdAt;
+  String? updatedAt;
   List<ProductEntity>? product;
 
   StockProductEntity({

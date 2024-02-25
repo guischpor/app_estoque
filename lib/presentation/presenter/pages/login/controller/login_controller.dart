@@ -137,8 +137,6 @@ abstract class LoginBase with Store {
       },
       (success) {
         rememberData = success;
-
-        print(rememberData);
       },
     );
   }

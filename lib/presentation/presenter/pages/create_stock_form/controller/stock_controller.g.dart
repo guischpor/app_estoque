@@ -66,9 +66,27 @@ mixin _$StockController on StockBase, Store {
       required String unitStore,
       required String date,
       required String userID,
-      required int statusID,
-      String? listID}) {
+      required int statusID}) {
     return _$createStockProductAsyncAction.run(() => super.createStockProduct(
+        context: context,
+        unitStore: unitStore,
+        date: date,
+        userID: userID,
+        statusID: statusID));
+  }
+
+  late final _$updateStockProductAsyncAction =
+      AsyncAction('StockBase.updateStockProduct', context: context);
+
+  @override
+  Future<void> updateStockProduct(
+      {required BuildContext context,
+      required String unitStore,
+      required String date,
+      required String userID,
+      required int statusID,
+      required String listID}) {
+    return _$updateStockProductAsyncAction.run(() => super.updateStockProduct(
         context: context,
         unitStore: unitStore,
         date: date,

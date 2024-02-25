@@ -6,6 +6,7 @@ import 'package:app_estoque/core/utils/date_input_converter.dart';
 import 'package:app_estoque/presentation/domain/entities/stock_product.dart';
 import '../../../../domain/usecases/get_stock_product_usecase/get_stock_product_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/create_sotck_usecase/create_sotck_usecase.dart';
+import 'package:app_estoque/presentation/domain/usecases/update_stock_product_usecase/update_stock_product_usecase.dart';
 
 part 'stock_controller.g.dart';
 
@@ -14,10 +15,12 @@ class StockController = StockBase with _$StockController;
 abstract class StockBase with Store {
   final CreateStockUseCases createStockUseCase;
   final GetStockProductUseCase getStockProductUseCase;
+  final UpdateStockProductUseCase updateStockProductUseCase;
 
   StockBase({
     required this.createStockUseCase,
     required this.getStockProductUseCase,
+    required this.updateStockProductUseCase,
   });
 
   @observable
@@ -46,12 +49,10 @@ abstract class StockBase with Store {
     required String date,
     required String userID,
     required int statusID,
-    String? listID,
   }) async {
     final dataConverter = DateInputConverter().convertStringToFormDate(date);
 
     final stock = StockProductEntity(
-      id: listID,
       unitStore: unitStore,
       date: dataConverter,
       userID: userID,
@@ -81,6 +82,58 @@ abstract class StockBase with Store {
           showSnackBarDialog(
             title: 'Sucesso',
             label: 'Estoque salvo com sucesso',
+            icon: Icons.check,
+            textColorLabel: AppColors.white,
+            backgroundColor: AppColors.green,
+          ),
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> updateStockProduct({
+    required BuildContext context,
+    required String unitStore,
+    required String date,
+    required String userID,
+    required int statusID,
+    required String listID,
+  }) async {
+    final dataConverter = DateInputConverter().convertStringToFormDate(date);
+
+    final stock = StockProductEntity(
+      unitStore: unitStore,
+      date: dataConverter,
+      userID: userID,
+      statusID: statusID,
+      id: listID,
+    );
+
+    final result = await updateStockProductUseCase.call(stock);
+
+    result.fold(
+      (error) {
+        isLoading = false;
+        setLoading(false);
+        setSuccess(false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          showSnackBarDialog(
+            title: 'Error',
+            label: error.toString(),
+            icon: Icons.error,
+            textColorLabel: AppColors.white,
+            backgroundColor: AppColors.red,
+          ),
+        );
+      },
+      (success) {
+        setLoading(false);
+        setSuccess(true);
+        ScaffoldMessenger.of(context).showSnackBar(
+          showSnackBarDialog(
+            title: 'Sucesso',
+            label: 'Estoque alterado com sucesso',
             icon: Icons.check,
             textColorLabel: AppColors.white,
             backgroundColor: AppColors.green,

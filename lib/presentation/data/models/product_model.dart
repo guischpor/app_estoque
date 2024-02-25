@@ -20,8 +20,8 @@ class ProductModel extends ProductEntity {
       'quantityPackaging': quantityPackaging ?? 0,
       'quantity': quantity ?? 0,
       'barCode': barCode ?? '',
-      'createdAt': createdAt ?? DateTime.now().toIso8601String(),
-      'updatedAt': updatedAt ?? DateTime.now().toIso8601String(),
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 
@@ -34,8 +34,8 @@ class ProductModel extends ProductEntity {
           : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
       barCode: map['barCode'] != null ? map['barCode'] as String : null,
-      createdAt: DateTime.parse(map['createdAt']),
-      updatedAt: DateTime.parse(map['updatedAt']),
+      createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
+      updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
     );
   }
 

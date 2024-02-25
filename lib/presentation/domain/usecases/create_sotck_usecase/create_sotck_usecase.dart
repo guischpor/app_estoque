@@ -4,7 +4,6 @@ import '../../../data/models/stock_model.dart';
 import 'package:app_estoque/presentation/domain/entities/stock_product.dart';
 import '../../repositories/create_sotck_repository/create_sotck_repository.dart';
 
-
 class CreateStockUseCases {
   final CreateStockRepository _createStockRepository;
 

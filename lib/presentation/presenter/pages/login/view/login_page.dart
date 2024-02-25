@@ -56,6 +56,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void getRememberAccount() async {
+    if (loginController.rememberData.isEmpty ||
+        loginController.rememberData['isChecked'] == null) {
+      return;
+    }
+
     await loginController.getRememberAccount().then((value) {
       if (loginController.rememberData['isChecked']) {
         _emailController.text = loginController.rememberData['email'];
