@@ -1,8 +1,6 @@
 import 'package:intl/intl.dart';
 import '../app_consts/app_consts.dart';
 
-
-
 extension StringExtensionNull on String? {
   bool isTrimEmptyOrNull() {
     return this == null || this!.trim().isEmpty;
@@ -233,7 +231,7 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  String monthToString() => AppConsts.months[month - 1];
+  String monthToString() => AppConst.months[month - 1];
 
   DateTime justDate() => DateTime(year, month, day);
 

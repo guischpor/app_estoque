@@ -41,6 +41,22 @@ mixin _$LoginController on LoginBase, Store {
     });
   }
 
+  late final _$isSuccessAtom =
+      Atom(name: 'LoginBase.isSuccess', context: context);
+
+  @override
+  bool get isSuccess {
+    _$isSuccessAtom.reportRead();
+    return super.isSuccess;
+  }
+
+  @override
+  set isSuccess(bool value) {
+    _$isSuccessAtom.reportWrite(value, super.isSuccess, () {
+      super.isSuccess = value;
+    });
+  }
+
   late final _$isCheckedAtom =
       Atom(name: 'LoginBase.isChecked', context: context);
 
@@ -88,6 +104,34 @@ mixin _$LoginController on LoginBase, Store {
     });
   }
 
+  late final _$rememberDataAtom =
+      Atom(name: 'LoginBase.rememberData', context: context);
+
+  @override
+  Map<dynamic, dynamic> get rememberData {
+    _$rememberDataAtom.reportRead();
+    return super.rememberData;
+  }
+
+  @override
+  set rememberData(Map<dynamic, dynamic> value) {
+    _$rememberDataAtom.reportWrite(value, super.rememberData, () {
+      super.rememberData = value;
+    });
+  }
+
+  late final _$loginAsyncAction =
+      AsyncAction('LoginBase.login', context: context);
+
+  @override
+  Future<void> login(
+      {required String email,
+      required String password,
+      required BuildContext context}) {
+    return _$loginAsyncAction.run(
+        () => super.login(email: email, password: password, context: context));
+  }
+
   late final _$LoginBaseActionController =
       ActionController(name: 'LoginBase', context: context);
 
@@ -97,6 +141,17 @@ mixin _$LoginController on LoginBase, Store {
         _$LoginBaseActionController.startAction(name: 'LoginBase.setLoading');
     try {
       return super.setLoading(value);
+    } finally {
+      _$LoginBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSuccess(bool value) {
+    final _$actionInfo =
+        _$LoginBaseActionController.startAction(name: 'LoginBase.setSuccess');
+    try {
+      return super.setSuccess(value);
     } finally {
       _$LoginBaseActionController.endAction(_$actionInfo);
     }
@@ -114,11 +169,16 @@ mixin _$LoginController on LoginBase, Store {
   }
 
   @override
-  void setChecked(bool? value) {
+  void setChecked(
+      {bool? value,
+      required BuildContext context,
+      required String password,
+      required String email}) {
     final _$actionInfo =
         _$LoginBaseActionController.startAction(name: 'LoginBase.setChecked');
     try {
-      return super.setChecked(value);
+      return super.setChecked(
+          value: value, context: context, password: password, email: email);
     } finally {
       _$LoginBaseActionController.endAction(_$actionInfo);
     }
@@ -129,9 +189,11 @@ mixin _$LoginController on LoginBase, Store {
     return '''
 isLoading: ${isLoading},
 isObscure: ${isObscure},
+isSuccess: ${isSuccess},
 isChecked: ${isChecked},
 email: ${email},
-password: ${password}
+password: ${password},
+rememberData: ${rememberData}
     ''';
   }
 }

@@ -10,9 +10,33 @@ abstract class CustomServerException implements Exception {
 }
 
 class ServerBadRequest extends CustomServerException {
-  ServerBadRequest() : super('Erro interno!.');
+  ServerBadRequest() : super('Erro interno!');
 }
 
 class BoxNotFound extends CustomServerException {
-  BoxNotFound() : super('Box não encontrado!.');
+  BoxNotFound() : super('Box não encontrado!');
+}
+
+class UserNotFound extends CustomServerException {
+  UserNotFound() : super('Usuário não foi encontrado!');
+}
+
+class EmailAlreadyExists extends CustomServerException {
+  EmailAlreadyExists() : super('Esse email ja existe!');
+}
+
+class CPFAlreadyExists extends CustomServerException {
+  CPFAlreadyExists() : super('Esse CPF ja foi cadastrado!');
+}
+
+class EmailNotFound extends CustomServerException {
+  EmailNotFound() : super('Email não encontrado!');
+}
+
+class EmailAndPasswordNotMatch extends CustomServerException {
+  EmailAndPasswordNotMatch() : super('Email e senha não conferem!');
+}
+
+class PasswordNotMatch extends CustomServerException {
+  PasswordNotMatch() : super('Senha incorreta!');
 }

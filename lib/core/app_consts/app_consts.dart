@@ -1,4 +1,6 @@
-class AppConsts {
+import '../../presentation/domain/entities/status_list_entity.dart';
+
+class AppConst {
   static const List<String> months = [
     'JAN',
     'FEV',
@@ -74,4 +76,15 @@ class AppConsts {
         return '';
     }
   }
+
+  List<StatusListEntity> statusList = const [
+    StatusListEntity(
+      id: 0,
+      status: 'Pendente',
+    ),
+    StatusListEntity(
+      id: 1,
+      status: 'Enviado',
+    ),
+  ];
 }

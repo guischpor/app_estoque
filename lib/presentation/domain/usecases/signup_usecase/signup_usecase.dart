@@ -4,7 +4,6 @@ import '../../../data/models/user_model.dart';
 import '../../../../core/errors/failure.dart';
 import '../../repositories/signup_repository/signup_repository.dart';
 
-
 class SignUpUseCase {
   final SignUpRepository _signUpRepository;
 

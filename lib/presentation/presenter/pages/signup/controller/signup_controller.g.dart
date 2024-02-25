@@ -170,6 +170,19 @@ mixin _$SignUpController on SignUpBase, Store {
         context: context));
   }
 
+  late final _$getUserAsyncAction =
+      AsyncAction('SignUpBase.getUser', context: context);
+
+  @override
+  Future<void> getUser(
+      {required BuildContext context,
+      required String id,
+      required String email,
+      required String cpf}) {
+    return _$getUserAsyncAction.run(
+        () => super.getUser(context: context, id: id, email: email, cpf: cpf));
+  }
+
   late final _$SignUpBaseActionController =
       ActionController(name: 'SignUpBase', context: context);
 

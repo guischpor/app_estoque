@@ -1,9 +1,11 @@
 import 'dart:convert';
 import '../../domain/entities/user_entity.dart';
+import 'package:app_estoque/core/utils/encrypt_password.dart';
 
+// ignore_for_file: must_be_immutable
 
 class UserModel extends UserEntity {
-  const UserModel({
+  UserModel({
     super.id,
     super.name,
     super.cpf,
@@ -25,13 +27,15 @@ class UserModel extends UserEntity {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  factory UserModel.fromMap(Map<dynamic, dynamic> map) {
     return UserModel(
       id: map['id'] as String,
       name: map['name'] != null ? map['name'] as String : null,
       cpf: map['cpf'] != null ? map['cpf'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
-      password: map['password'] != null ? map['password'] as String : null,
+      password: map['password'] != null
+          ? EncryptPassword.decrypt(map['password'] as String)
+          : null,
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['createdAt']),
     );

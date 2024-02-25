@@ -13,6 +13,7 @@ import '../../../widgets/custom_buttons/custom_button.dart';
 import '../../../widgets/custom_buttons/custom_text_button.dart';
 import '../../../../../core/dependencies/injection_dependencies.dart';
 import 'package:app_estoque/presentation/presenter/pages/login/controller/login_controller.dart';
+import 'package:app_estoque/presentation/presenter/controllers/app_controller/app_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,26 +24,49 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final loginController = getIt<LoginController>();
+  final appController = getIt<AppController>();
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    super.initState();
+    getRememberAccount();
+  }
+
   Future<void> login() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    // await loginController.login(
-    //   _emailcontroller.text,
-    //   _passwordcontroller.text,
-    // );
+    await loginController.login(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    if (loginController.isSuccess) {
+      context.go(NamedRoutes.home);
+
+      await appController.setLoggedIn(true);
+    }
   }
 
-  @override
-  void initState() {
-    super.initState();
+  void getRememberAccount() async {
+    await loginController.getRememberAccount().then((value) {
+      if (loginController.rememberData['isChecked']) {
+        _emailController.text = loginController.rememberData['email'];
+        _passwordController.text = loginController.rememberData['password'];
+        loginController.isChecked = loginController.rememberData['isChecked'];
+      } else {
+        _emailController.clear();
+        _passwordController.clear();
+        loginController.isChecked = loginController.rememberData['isChecked'];
+      }
+    });
   }
 
   @override
@@ -56,28 +80,30 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
-        return Scaffold(
-          backgroundColor: AppColors.scaffoldBackgroundColor,
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.sizeOf(context).longestSide * 0.02,
-                  ),
-                  child: const CustomImage(
-                    Assets.logo,
-                    height: 200,
+        return loginController.isSuccess
+            ? const Center(child: CircularProgressIndicator())
+            : Scaffold(
+                backgroundColor: AppColors.scaffoldBackgroundColor,
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.sizeOf(context).longestSide * 0.02,
+                        ),
+                        child: const CustomImage(
+                          Assets.logo,
+                          height: 200,
+                        ),
+                      ),
+                      _form(),
+                    ],
                   ),
                 ),
-                _form(),
-              ],
-            ),
-          ),
-        );
+              );
       },
     );
   }
@@ -188,7 +214,12 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Checkbox(
               value: loginController.isChecked,
-              onChanged: loginController.setChecked,
+              onChanged: (value) => loginController.setChecked(
+                context: context,
+                password: _passwordController.text,
+                email: _emailController.text,
+                value: value,
+              ),
             ),
             Text(
               'Lembrar conta!',

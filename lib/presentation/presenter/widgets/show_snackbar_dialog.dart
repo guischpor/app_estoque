@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import '../../../core/styles/app_text_style.dart';
 
@@ -15,6 +16,7 @@ SnackBar showSnackBarDialog({
     action: action,
     content: Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           icon,
@@ -22,18 +24,22 @@ SnackBar showSnackBarDialog({
           size: 24,
         ),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: AppTextStyle.robotoWhite18.font14.normal,
-            ),
-            Text(
-              label,
-              style: AppTextStyle.robotoWhite18.font14.bold,
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppTextStyle.robotoWhite18.font14.normal,
+              ),
+              Text(
+                label,
+                style: AppTextStyle.robotoWhite18.font14.bold,
+                overflow: TextOverflow.visible,
+                softWrap: true,
+              ),
+            ],
+          ),
         ),
       ],
     ),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'core/hive_config/hive_config.dart';
 import 'core/dependencies/injection_dependencies.dart';
 import 'package:app_estoque/core/styles/theme_data.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'App Estoque',
       theme: themeStyle.theme,
-      routerConfig: RouterApp().router,
+      routerConfig: routeProvider,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('pt', 'BR')],
     );
   }
 }

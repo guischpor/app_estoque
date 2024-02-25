@@ -8,10 +8,9 @@ import 'package:app_estoque/core/errors/server_exception.dart';
 class SignUpDataSourceImpl implements SignUpDataSource {
   @override
   Future<dynamic> createUser(UserModel user) async {
-    late Box box;
-    box = await Hive.openBox('users');
-
     try {
+      late Box box;
+      box = await Hive.openBox('users');
       final newUser = UserModel(
         id: const Uuid().v1(),
         name: user.name,
@@ -22,6 +21,18 @@ class SignUpDataSourceImpl implements SignUpDataSource {
         updatedAt: user.updatedAt,
       );
 
+      final getValidateUser = box.toMap();
+
+      getValidateUser.forEach((key, value) {
+        if (value['email'] == user.email) {
+          throw EmailAlreadyExists();
+        }
+
+        if (value['cpf'] == user.cpf) {
+          throw CPFAlreadyExists();
+        }
+      });
+
       await box.put(
         newUser.id,
         newUser.toMap(),
@@ -29,7 +40,7 @@ class SignUpDataSourceImpl implements SignUpDataSource {
 
       return box.get(newUser.id);
     } on HiveError catch (error) {
-      if (error.message.contains("Box not found")) {
+      if (error.message.contains('Box not found')) {
         throw BoxNotFound();
       }
 

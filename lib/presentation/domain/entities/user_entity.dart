@@ -1,15 +1,17 @@
 import 'package:equatable/equatable.dart';
+// ignore_for_file: must_be_immutable
+
 
 class UserEntity extends Equatable {
-  final String? id;
-  final String? name;
-  final String? cpf;
-  final String? email;
-  final String? password;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  String? id;
+  String? name;
+  String? cpf;
+  String? email;
+  String? password;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  const UserEntity({
+  UserEntity({
     this.id,
     this.name,
     this.cpf,
