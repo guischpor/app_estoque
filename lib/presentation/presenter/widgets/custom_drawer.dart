@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/styles/app_color.dart';
 import '../../../core/routes/named_routes.dart';
+import '../../../core/services/user_service_local.dart';
 import '../controllers/app_controller/app_controller.dart';
 import '../../../core/dependencies/injection_dependencies.dart';
-
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -15,6 +15,7 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
   final appController = getIt<AppController>();
+  final userServiceLocal = getIt<UserServiceLocal>();
   @override
   void initState() {
     super.initState();
@@ -22,6 +23,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   void logout() async {
     await appController.setLoggedIn(false);
+
+    final userHasLocal = await userServiceLocal.hasLocalUser();
+    if (userHasLocal) {
+      await userServiceLocal.deleteLocalUser();
+    }
+
     if (appController.isCheckLogged == false) {
       context.go(NamedRoutes.login);
     }

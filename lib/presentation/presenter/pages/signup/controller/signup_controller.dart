@@ -20,6 +20,9 @@ abstract class SignUpBase with Store {
   });
 
   @observable
+  UserEntity? user;
+
+  @observable
   bool isLoading = false;
 
   @observable
@@ -100,7 +103,6 @@ abstract class SignUpBase with Store {
         );
       },
       (success) {
-        print(success);
         setLoading(false);
         setSuccess(true);
 
@@ -144,6 +146,7 @@ abstract class SignUpBase with Store {
         );
       },
       (success) {
+        user = success;
         setLoading(false);
       },
     );

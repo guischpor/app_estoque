@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/styles/app_color.dart';
 import '../../../widgets/show_snackbar_dialog.dart';
+import 'package:app_estoque/core/services/user_service_local.dart';
 import '../../../../domain/usecases/login_usecase/login_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/remember_account_usecase/remember_account_usecase.dart';
 
@@ -12,10 +13,12 @@ class LoginController = LoginBase with _$LoginController;
 abstract class LoginBase with Store {
   final LoginUseCase loginUseCase;
   final RememberAccountUseCase rememberAccountUseCase;
+  final UserServiceLocal userServiceLocal;
 
   LoginBase({
     required this.loginUseCase,
     required this.rememberAccountUseCase,
+    required this.userServiceLocal,
   });
 
   @observable
@@ -95,7 +98,6 @@ abstract class LoginBase with Store {
 
     result.fold(
       (error) {
-        print(error.toString());
         setLoading(false);
         setSuccess(false);
         ScaffoldMessenger.of(context).showSnackBar(
@@ -109,7 +111,6 @@ abstract class LoginBase with Store {
         );
       },
       (success) {
-        print(success);
         setLoading(false);
         setSuccess(true);
         ScaffoldMessenger.of(context).showSnackBar(
@@ -121,6 +122,8 @@ abstract class LoginBase with Store {
             backgroundColor: AppColors.green,
           ),
         );
+
+        userServiceLocal.saveLocalUser(success);
       },
     );
   }

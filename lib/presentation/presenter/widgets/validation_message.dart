@@ -17,10 +17,13 @@ class ValidationMessage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          icon,
-          color: AppColors.lightGrey,
-          size: 18,
+        Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: Icon(
+            icon,
+            color: AppColors.lightGrey,
+            size: 18,
+          ),
         ),
         Text(
           message,

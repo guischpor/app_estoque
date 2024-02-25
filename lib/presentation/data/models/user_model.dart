@@ -1,8 +1,8 @@
 import 'dart:convert';
 import '../../domain/entities/user_entity.dart';
 import 'package:app_estoque/core/utils/encrypt_password.dart';
-
 // ignore_for_file: must_be_immutable
+
 
 class UserModel extends UserEntity {
   UserModel({
@@ -37,7 +37,7 @@ class UserModel extends UserEntity {
           ? EncryptPassword.decrypt(map['password'] as String)
           : null,
       createdAt: DateTime.parse(map['createdAt']),
-      updatedAt: DateTime.parse(map['createdAt']),
+      updatedAt: DateTime.parse(map['updatedAt']),
     );
   }
 
