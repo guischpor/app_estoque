@@ -7,6 +7,7 @@ import '../../../../../core/utils/date_input_converter.dart';
 import 'package:app_estoque/presentation/domain/entities/product_entity.dart';
 import 'package:app_estoque/presentation/domain/usecases/get_product_item_usecase/get_product_item_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/add_product_item_usecase/add_product_item_usecase.dart';
+import 'package:app_estoque/presentation/domain/usecases/update_product_item_usecase/update_product_item_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/delete_product_item_usecase/delete_product_item_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/get_all_products_item_usecase/get_all_products_item_usecase.dart';
 
@@ -19,12 +20,14 @@ abstract class StockDetailBase with Store {
   final GetAllProductsUseCase getAllProductsUseCase;
   final DeleteProductItemUseCase deleteProductItemUseCase;
   final GetProductItemUseCase getProductItemUseCase;
+  final UpdateProductItemUseCase updateProductItemUseCase;
 
   StockDetailBase({
     required this.addProductItemUseCase,
     required this.getAllProductsUseCase,
     required this.deleteProductItemUseCase,
     required this.getProductItemUseCase,
+    required this.updateProductItemUseCase,
   });
 
   @observable
@@ -193,6 +196,69 @@ abstract class StockDetailBase with Store {
         product = success;
         setLoading(false);
         setSuccess(true);
+      },
+    );
+  }
+
+  @action
+  Future<void> updateProductItem({
+    required BuildContext context,
+    required String userID,
+    required String stockID,
+    required String productID,
+    required String barCode,
+    required String title,
+    required String quantity,
+    required String quantityPackaging,
+    required String expirationDate,
+    required String createdAt,
+    required String updatedAt,
+  }) async {
+    final dataConverter =
+        DateInputConverter().convertStringToFormDate(expirationDate);
+
+    final productItem = ProductEntity(
+      id: productID,
+      stockID: stockID,
+      userID: userID,
+      barCode: barCode,
+      title: title,
+      quantity: quantity,
+      quantityPackaging: product.quantityPackaging,
+      expirationDate: dataConverter,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+
+    final result = await updateProductItemUseCase.call(productItem);
+
+    result.fold(
+      (error) {
+        isLoading = false;
+        setLoading(false);
+        setSuccess(false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          showSnackBarDialog(
+            title: 'Error',
+            label: error.toString(),
+            icon: Icons.error,
+            textColorLabel: AppColors.white,
+            backgroundColor: AppColors.red,
+          ),
+        );
+      },
+      (success) {
+        setLoading(false);
+        setSuccess(true);
+        ScaffoldMessenger.of(context).showSnackBar(
+          showSnackBarDialog(
+            title: 'Sucesso',
+            label: 'Produto alterado com sucesso',
+            icon: Icons.check,
+            textColorLabel: AppColors.white,
+            backgroundColor: AppColors.green,
+          ),
+        );
       },
     );
   }

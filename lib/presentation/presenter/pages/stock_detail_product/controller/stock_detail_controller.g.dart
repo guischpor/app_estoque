@@ -122,6 +122,36 @@ mixin _$StockDetailController on StockDetailBase, Store {
         .run(() => super.getAllProductItems(context));
   }
 
+  late final _$updateProductItemAsyncAction =
+      AsyncAction('StockDetailBase.updateProductItem', context: context);
+
+  @override
+  Future<void> updateProductItem(
+      {required BuildContext context,
+      required String userID,
+      required String stockID,
+      required String productID,
+      required String barCode,
+      required String title,
+      required String quantity,
+      required String quantityPackaging,
+      required String expirationDate,
+      required String createdAt,
+      required String updatedAt}) {
+    return _$updateProductItemAsyncAction.run(() => super.updateProductItem(
+        context: context,
+        userID: userID,
+        stockID: stockID,
+        productID: productID,
+        barCode: barCode,
+        title: title,
+        quantity: quantity,
+        quantityPackaging: quantityPackaging,
+        expirationDate: expirationDate,
+        createdAt: createdAt,
+        updatedAt: updatedAt));
+  }
+
   late final _$StockDetailBaseActionController =
       ActionController(name: 'StockDetailBase', context: context);
 

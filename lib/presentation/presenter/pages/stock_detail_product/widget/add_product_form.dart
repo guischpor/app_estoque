@@ -118,6 +118,35 @@ class _AddProductFormState extends State<AddProductForm> {
     if (!_formKey.currentState!.validate()) {
       return;
     }
+
+    stockDetailController.setLoading(true);
+
+    await stockDetailController
+        .updateProductItem(
+      context: context,
+      stockID: widget.listID!,
+      productID: widget.productID!,
+      barCode: _barCodeController.text,
+      title: _titleController.text,
+      quantity: _quantityController.text,
+      quantityPackaging: _quantityPackagingController.text,
+      expirationDate: _expirationDateController.text,
+      userID: widget.userID!,
+      createdAt: stockDetailController.product.createdAt!,
+      updatedAt: stockDetailController.product.updatedAt!,
+    )
+        .then((value) {
+      stockDetailController.getAllProductItems(context);
+    });
+
+    if (stockDetailController.isSuccess) {
+      context.goNamed(
+        NamedPaths.stockDetail,
+        pathParameters: {
+          'listID': widget.listID!,
+        },
+      );
+    }
   }
 
   void populateControllers(ProductEntity product) async {

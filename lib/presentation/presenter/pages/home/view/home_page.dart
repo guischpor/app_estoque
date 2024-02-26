@@ -4,7 +4,9 @@ import '../widget/card_stock_product.dart';
 import '../controller/home_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../../core/styles/app_color.dart';
+import '../../../../domain/entities/user_entity.dart';
 import '../../../../../core/routes/named_routes.dart';
+import '../../../../../core/services/user_service_local.dart';
 import '../../../../../core/dependencies/injection_dependencies.dart';
 import 'package:app_estoque/presentation/domain/entities/stock_product.dart';
 import 'package:app_estoque/presentation/presenter/widgets/custom_drawer.dart';
@@ -22,12 +24,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final homeController = getIt<HomeController>();
   final appController = getIt<AppController>();
+  final userServiceLocal = getIt<UserServiceLocal>();
+
   late final TabController _tabController;
+
+  UserEntity user = UserEntity();
 
   @override
   void initState() {
     super.initState();
     getAllStocksProducts();
+    getLocalUser();
     _tabController = TabController(
       length: 2,
       vsync: this,
@@ -38,6 +45,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  void getLocalUser() async {
+    final userHasLocal = await userServiceLocal.hasLocalUser();
+
+    if (userHasLocal) {
+      final userLocal = await userServiceLocal.getLocalUser();
+
+      user = UserEntity(
+        id: userLocal!.id,
+        name: userLocal.name,
+        email: userLocal.email,
+        cpf: userLocal.cpf,
+      );
+    }
   }
 
   void getAllStocksProducts() async {
@@ -54,6 +76,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        final pending = homeController.pendingStockProducts.where((element) {
+          return element.userID == user.id;
+        }).toList();
+
+        final shipped = homeController.shippedStockProducts.where((element) {
+          return element.userID == user.id;
+        }).toList();
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackgroundColor,
           appBar: customAppBar(
@@ -100,18 +129,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      homeController.pendingStockProducts.isEmpty
+                      pending.isEmpty
                           ? const Center(
                               child: ValidationMessage(
-                                message: 'Nenhum registro cadastrado.',
+                                message: 'Nenhum estoque cadastrado.',
                                 icon: Icons.info,
                               ),
                             )
                           : _pending(homeController.pendingStockProducts),
-                      homeController.shippedStockProducts.isEmpty
+                      shipped.isEmpty
                           ? const Center(
                               child: ValidationMessage(
-                                message: 'Nenhum registro cadastrado.',
+                                message: 'Nenhum estoque cadastrado.',
                                 icon: Icons.info,
                               ),
                             )
@@ -125,11 +154,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   Widget _pending(List<StockProductEntity> pendings) {
+    final peddingByUser =
+        pendings.where((element) => element.userID! == user.id).toList();
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: pendings.length,
+      itemCount: peddingByUser.length,
       itemBuilder: (_, index) {
-        final pending = pendings[index];
+        final pending = peddingByUser[index];
         return CardStockProduct(
           date: pending.date!,
           unitNameStore: pending.unitStore!,
@@ -162,11 +193,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   Widget _shipped(List<StockProductEntity> shippeds) {
+    final shippedsByUser =
+        shippeds.where((element) => element.userID! == user.id).toList();
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: shippeds.length,
+      itemCount: shippedsByUser.length,
       itemBuilder: (_, index) {
-        final shipped = shippeds[index];
+        final shipped = shippedsByUser[index];
         return CardStockProduct(
           date: shipped.date!,
           unitNameStore: shipped.unitStore!,

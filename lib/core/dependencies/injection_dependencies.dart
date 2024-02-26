@@ -20,6 +20,7 @@ import 'package:app_estoque/presentation/domain/usecases/remember_account_usecas
 import 'package:app_estoque/presentation/data/repositories_impl/login_repository_impl/login_repository_impl.dart';
 import 'package:app_estoque/presentation/domain/usecases/get_stock_product_usecase/get_stock_product_usecase.dart';
 import 'package:app_estoque/presentation/data/datasources/local/get_user_datasources/get_user_datasource_impl.dart';
+import 'package:app_estoque/presentation/domain/usecases/update_product_item_usecase/update_product_item_usecase.dart';
 import 'package:app_estoque/presentation/domain/usecases/delete_product_item_usecase/delete_product_item_usecase.dart';
 import 'package:app_estoque/presentation/presenter/pages/stock_detail_product/controller/stock_detail_controller.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/get_user_repository_impl/get_user_repository_impl.dart';
@@ -38,10 +39,12 @@ import 'package:app_estoque/presentation/data/datasources/local/get_stock_produc
 import 'package:app_estoque/presentation/data/repositories_impl/get_product_item_repository_impl/get_product_item_repository_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/add_product_item_repository_impl/add_product_item_repository_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/remember_account_repository_impl/remember_account_repository_impl.dart';
+import 'package:app_estoque/presentation/data/datasources/local/update_product_item_datasources/update_product_item_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/delete_product_item_datasources/delete_product_item_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/get_stock_product_repository_impl/get_stock_product_repository_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/update_stock_product_datasources/update_stock_product_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/delete_stock_product_datasources/delete_stock_product_datasource_impl.dart';
+import 'package:app_estoque/presentation/data/repositories_impl/update_product_item_repository_impl/update_product_item_repository_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/delete_product_item_repository_impl/delete_product_item_repository_impl.dart';
 import 'package:app_estoque/presentation/data/datasources/local/get_all_products_item_datasources/get_all_products_item_datasource_impl.dart';
 import 'package:app_estoque/presentation/data/repositories_impl/update_stock_product_repository_impl/update_stock_product_repository_impl.dart';
@@ -68,6 +71,7 @@ void injectionDependencies() {
   getIt.registerFactory(() => GetAllProductsDataSourceImpl());
   getIt.registerFactory(() => DeleteProductItemDataSourceImpl());
   getIt.registerFactory(() => GetProductItemDataSourceImpl());
+  getIt.registerFactory(() => UpdateProductItemDataSourceImpl());
 
   //Repositories
   getIt.registerFactory(
@@ -109,6 +113,9 @@ void injectionDependencies() {
   getIt.registerFactory(() => GetProductItemRepositoryImpl(
         getIt<GetProductItemDataSourceImpl>(),
       ));
+  getIt.registerFactory(() => UpdateProductItemRepositoryImpl(
+        getIt<UpdateProductItemDataSourceImpl>(),
+      ));
 
   //UseCases
   getIt.registerFactory(() => SignUpUseCase(
@@ -138,6 +145,8 @@ void injectionDependencies() {
       () => DeleteProductItemUseCase(getIt<DeleteProductItemRepositoryImpl>()));
   getIt.registerFactory(
       () => GetProductItemUseCase(getIt<GetProductItemRepositoryImpl>()));
+  getIt.registerFactory(
+      () => UpdateProductItemUseCase(getIt<UpdateProductItemRepositoryImpl>()));
 
   //Controllers
   getIt.registerFactory(() => LoginController(
@@ -165,6 +174,7 @@ void injectionDependencies() {
         getAllProductsUseCase: getIt<GetAllProductsUseCase>(),
         deleteProductItemUseCase: getIt<DeleteProductItemUseCase>(),
         getProductItemUseCase: getIt<GetProductItemUseCase>(),
+        updateProductItemUseCase: getIt<UpdateProductItemUseCase>(),
       ));
 
   getIt.registerFactory(() => StockController(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widget/add_product_form.dart';
 import 'package:go_router/go_router.dart';
 import '../widget/card_product_item.dart';
 import '../../../widgets/custom_app_bar.dart';
@@ -14,7 +13,6 @@ import '../../../../../core/services/user_service_local.dart';
 import 'package:app_estoque/core/extensions/app_extensions.dart';
 import '../../create_stock_form/controller/stock_controller.dart';
 import '../../../../../core/dependencies/injection_dependencies.dart';
-import 'package:app_estoque/presentation/presenter/widgets/custom_show_dialog.dart';
 import 'package:app_estoque/presentation/presenter/widgets/validation_message.dart';
 
 class StockDetailProductPage extends StatefulWidget {
@@ -94,7 +92,7 @@ class _StockDetailProductPageState extends State<StockDetailProductPage> {
           appBar: customAppBar(
             context: context,
             widget: Text(
-              'Detalhes do Estoque',
+              '${productByStockID.length} itens no estoque',
               style: AppTextStyle.nunitoWhite18.font24.bold,
             ),
             isLeading: true,
@@ -232,7 +230,15 @@ class _StockDetailProductPageState extends State<StockDetailProductPage> {
           expirationDate: product.expirationDate ?? '',
           productName: product.title ?? '',
           quantity: product.quantity ?? '',
-          onView: () {},
+          onView: () {
+            context.goNamed(
+              NamedPaths.productDetail,
+              pathParameters: {
+                'productID': product.id!,
+                'listID': widget.listID!,
+              },
+            );
+          },
           onEdit: () {
             context.goNamed(
               NamedPaths.addProductForm,
