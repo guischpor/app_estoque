@@ -5,9 +5,13 @@
 Este projeto foi desenvolvido utilizando o framework Flutter!
 - Versão do Flutter 3.19.0
 - Versão do Dart 3.3.0
+- Usei Clean Architecture
+- Gerenciamento de Estados MOBX
+- Get It como Ingeção de Dependências
+- Foi utilizado os Patterns de Clean Code, POO e Solid.
 
 Para iniciar o projeto, basta apetar F5.
-- Use o comandos para limpar o cache caso de erro.
+- Use o comandos para limpar o cache, caso de erro.
 - flutter clean
 - flutter pub get
 - flutter run
