@@ -44,19 +44,13 @@ dependencies:
   dartz: ^0.10.1
   validatorless: ^1.2.3
   path_provider: ^2.1.2
-  flutter_native_splash: ^2.3.13
   flutter_launcher_icons: ^0.13.1
-  dio: ^5.4.1
   equatable: ^2.0.5
   intl: ^0.18.1
   mask_text_input_formatter: ^2.9.0
   google_fonts: ^6.1.0
-  package_info_plus: ^4.2.0
-  skeletonizer: ^1.0.1
-  cached_network_image: ^3.3.1
   hive_flutter: ^1.1.0
   go_router: ^13.2.0
-  jwt_decoder: ^2.0.1
   localization: ^2.1.1
 
 dev_dependencies:
@@ -79,30 +73,9 @@ dev_dependencies:
   #   ios: true
   #   image_path: "assets/icons/icon_paradapet_android.png"
   #   image_path_ios: "assets/icons/icon_paradapet.png"
-  #   adaptive_icon_background: "#ec6893"
+  #   adaptive_icon_background: "#7EADED"
   #   adaptive_icon_foreground: "assets/icons/icon_paradapet_android.png"
   #   remove_alpha_ios: true
-
-  # flutter_native_splash:
-  #   #Config Plugin Flutter Native Splash
-  #   #1 - flutter clean
-  #   #2 - flutter pub get
-  #   #3 - flutter clean && flutter pub get && dart run flutter_native_splash:create
-
-  #   android: true
-  #   web: false
-  #   ios: true
-
-  #   color: "#ec6893"
-  #   image: assets/images/splash_logo.png
-  #   remove_alpha_ios: true
-  #   # branding: assets/splash_screen/splash_screen_1.png
-
-  #   android_12:
-  #     image: assets/images/logo_splash_screen_android_12.png
-  #     color: "#ec6893"
-
-  #   min_sdk_android: 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
