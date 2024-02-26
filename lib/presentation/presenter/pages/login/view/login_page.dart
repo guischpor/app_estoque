@@ -90,22 +90,25 @@ class _LoginPageState extends State<LoginPage> {
             : Scaffold(
                 backgroundColor: AppColors.scaffoldBackgroundColor,
                 body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          bottom: MediaQuery.sizeOf(context).longestSide * 0.02,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            bottom:
+                                MediaQuery.sizeOf(context).longestSide * 0.02,
+                          ),
+                          child: const CustomImage(
+                            Assets.logo,
+                            height: 200,
+                          ),
                         ),
-                        child: const CustomImage(
-                          Assets.logo,
-                          height: 200,
-                        ),
-                      ),
-                      _form(),
-                    ],
+                        _form(),
+                      ],
+                    ),
                   ),
                 ),
               );

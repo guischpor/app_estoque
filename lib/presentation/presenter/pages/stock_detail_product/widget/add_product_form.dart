@@ -201,24 +201,26 @@ class _AddProductFormState extends State<AddProductForm> {
                 padding: EdgeInsets.all(
                   MediaQuery.sizeOf(context).longestSide * 0.02,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _form(),
-                    CustomButton(
-                      onPressed: () async => widget.isEdit == true
-                          ? await updateProductItem()
-                          : await addProductItem(),
-                      label: widget.isEdit == true
-                          ? 'EDITAR LISTA'
-                          : 'CRIAR LISTA',
-                      width: double.infinity,
-                      fontSize: 15,
-                      padding: const EdgeInsets.all(12),
-                      backgroundColor: AppColors.blueLight,
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _form(),
+                      CustomButton(
+                        onPressed: () async => widget.isEdit == true
+                            ? await updateProductItem()
+                            : await addProductItem(),
+                        label: widget.isEdit == true
+                            ? 'EDITAR LISTA'
+                            : 'CRIAR LISTA',
+                        width: double.infinity,
+                        fontSize: 15,
+                        padding: const EdgeInsets.all(12),
+                        backgroundColor: AppColors.blueLight,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

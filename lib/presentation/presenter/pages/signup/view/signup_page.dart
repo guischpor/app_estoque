@@ -235,13 +235,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            CustomButton(
-              onPressed: () async => await signUp(),
-              label: 'CADASTRAR',
-              width: double.infinity,
-              fontSize: 15,
-              padding: const EdgeInsets.all(12),
-              backgroundColor: AppColors.blueLight,
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.sizeOf(context).longestSide * 0.2,
+              ),
+              child: CustomButton(
+                onPressed: () async => await signUp(),
+                label: 'CADASTRAR',
+                width: double.infinity,
+                fontSize: 15,
+                padding: const EdgeInsets.all(12),
+                backgroundColor: AppColors.blueLight,
+              ),
             ),
           ],
         ),

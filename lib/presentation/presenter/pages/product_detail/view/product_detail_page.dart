@@ -4,6 +4,7 @@ import '../../../widgets/custom_app_bar.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../../core/routes/named_routes.dart';
 import '../../../../../core/styles/app_text_style.dart';
+import 'package:app_estoque/core/extensions/app_extensions.dart';
 import '../../create_stock_form/controller/stock_controller.dart';
 import '../../../../../core/dependencies/injection_dependencies.dart';
 import '../../stock_detail_product/controller/stock_detail_controller.dart';
@@ -79,7 +80,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       _buildPresentation(
                         label: 'Data de Validade',
                         text:
-                            stockDetailController.product.expirationDate ?? '',
+                            DateTime.parse(stockDetailController.product.expirationDate ??
+                                    '')
+                                .toStringDDMMYYYY(separator: '/') ,
                       ),
                       _buildPresentation(
                         label: 'Código de Barras',
