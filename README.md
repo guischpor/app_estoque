@@ -24,6 +24,7 @@ No app conseguimos criar o estoque e adicionar os produtos na sua lista e altera
 É possível criar uma conta para múltiplos usuários.
 Existe um sistema de login e lembrar conta.
 É possível adicionar, editar e excluir os itens do estoque e produtos.
+Para abrir os detalhes do estoque, basta clicar no card do estoque.
 
 # Screenshot
 ![Projeto App Estoque  2024](https://github.com/guischpor/app_estoque/assets/38728633/a1954889-e68d-4cdc-85f6-5334311ca1cb)
