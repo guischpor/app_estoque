@@ -9,6 +9,7 @@ Este projeto foi desenvolvido utilizando o framework Flutter!
 - Gerenciamento de Estados MOBX
 - Get It como Ingeção de Dependências
 - Foi utilizado os Patterns de Clean Code, POO e Solid.
+- Utilizei o GO Router como gerenciamento de rotas
 
 Para iniciar o projeto, basta apetar F5.
 - Use o comandos para limpar o cache, caso de erro.
