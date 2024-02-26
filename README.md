@@ -21,5 +21,5 @@ Existe um sistema de login e lembrar conta.
 É possível adicionar, editar e excluir os itens do estoque e produtos.
 
 # Screenshot
-![Alt Text]([https://firebasestorage.googleapis.com/v0/b/my-shop-60e72.appspot.com/o/Projeto%20App%20Estoque%20%202024.png?alt=media&token=370498e2-b058-43e4-a0a0-4152ccb57c1d)
+([https://firebasestorage.googleapis.com/v0/b/my-shop-60e72.appspot.com/o/Projeto%20App%20Estoque%20%202024.png?alt=media&token=370498e2-b058-43e4-a0a0-4152ccb57c1d)
 
