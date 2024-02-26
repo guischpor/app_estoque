@@ -79,10 +79,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       _buildPresentation(
                         label: 'Data de Validade',
-                        text:
-                            DateTime.parse(stockDetailController.product.expirationDate ??
+                        text: DateTime.parse(
+                                stockDetailController.product.expirationDate ??
                                     '')
-                                .toStringDDMMYYYY(separator: '/') ,
+                            .toStringDDMMYYYY(separator: '/'),
                       ),
                       _buildPresentation(
                         label: 'Código de Barras',
@@ -99,7 +99,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       )
                     ],
                   ),
-                ));
+                ),
+              );
       },
     );
   }
