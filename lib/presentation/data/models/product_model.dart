@@ -11,31 +11,42 @@ class ProductModel extends ProductEntity {
     super.barCode,
     super.createdAt,
     super.updatedAt,
+    super.stockID,
+    super.userID,
+    super.expirationDate,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id ?? '',
+      'stockID': stockID ?? '',
+      'userID': userID ?? '',
       'title': title ?? '',
-      'quantityPackaging': quantityPackaging ?? 0,
-      'quantity': quantity ?? 0,
+      'quantityPackaging': quantityPackaging ?? '',
+      'quantity': quantity ?? '',
       'barCode': barCode ?? '',
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
+      'createdAt': createdAt ?? '',
+      'updatedAt': updatedAt ?? '',
+      'expirationDate': expirationDate ?? '',
     };
   }
 
   factory ProductModel.fromMap(Map<dynamic, dynamic> map) {
     return ProductModel(
       id: map['id'] != null ? map['id'] as String : null,
+      stockID: map['stockID'] != null ? map['stockID'] as String : null,
+      userID: map['userID'] != null ? map['userID'] as String : null,
       title: map['title'] != null ? map['title'] as String : null,
       quantityPackaging: map['quantityPackaging'] != null
-          ? map['quantityPackaging'] as int
+          ? map['quantityPackaging'] as String
           : null,
-      quantity: map['quantity'] != null ? map['quantity'] as int : null,
+      quantity: map['quantity'] != null ? map['quantity'] as String : null,
       barCode: map['barCode'] != null ? map['barCode'] as String : null,
       createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
       updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
+      expirationDate: map['expirationDate'] != null
+          ? map['expirationDate'] as String
+          : null,
     );
   }
 

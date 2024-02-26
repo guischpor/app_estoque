@@ -21,6 +21,10 @@ class StockNotFound extends CustomServerException {
   StockNotFound() : super('Produto Estoque não encontrado!');
 }
 
+class ProductNotFound extends CustomServerException {
+  ProductNotFound() : super('Produto não encontrado!');
+}
+
 class UserNotFound extends CustomServerException {
   UserNotFound() : super('Usuário não foi encontrado!');
 }

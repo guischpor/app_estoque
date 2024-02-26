@@ -3,9 +3,12 @@ import 'package:equatable/equatable.dart';
 
 class ProductEntity extends Equatable {
   String? id;
+  String? stockID;
+  String? userID;
   String? title;
-  int? quantityPackaging;
-  int? quantity;
+  String? quantityPackaging;
+  String? expirationDate;
+  String? quantity;
   String? barCode;
   String? createdAt;
   String? updatedAt;
@@ -18,6 +21,9 @@ class ProductEntity extends Equatable {
     this.barCode,
     this.createdAt,
     this.updatedAt,
+    this.stockID,
+    this.userID,
+    this.expirationDate,
   });
 
   @override
@@ -29,5 +35,8 @@ class ProductEntity extends Equatable {
         barCode,
         createdAt,
         updatedAt,
+        stockID,
+        userID,
+        expirationDate,
       ];
 }

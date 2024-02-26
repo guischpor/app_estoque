@@ -134,7 +134,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           date: pending.date!,
           unitNameStore: pending.unitStore!,
           statusID: pending.statusID!,
-          onView: () {},
+          onView: () {
+            context.goNamed(
+              NamedPaths.stockDetail,
+              pathParameters: {
+                'listID': pending.id!,
+              },
+            );
+          },
           onEdit: () {
             context.goNamed(
               NamedPaths.createStockForm,
@@ -164,7 +171,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           date: shipped.date!,
           unitNameStore: shipped.unitStore!,
           statusID: shipped.statusID!,
-          onView: () {},
+          onView: () {
+            context.goNamed(
+              NamedPaths.stockDetail,
+              pathParameters: {
+                'listID': shipped.id!,
+              },
+            );
+          },
           onEdit: () {
             context.goNamed(
               NamedPaths.createStockForm,

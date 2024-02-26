@@ -24,6 +24,7 @@ import 'package:app_estoque/presentation/presenter/pages/create_stock_form/contr
 
 class CreateStockForm extends StatefulWidget {
   String? listID;
+  String? userID;
   bool? isEdit;
   bool? isAdd;
 
@@ -32,6 +33,7 @@ class CreateStockForm extends StatefulWidget {
     this.listID,
     this.isEdit,
     this.isAdd,
+    this.userID,
   });
 
   @override
@@ -66,6 +68,7 @@ class _CreateStockFormState extends State<CreateStockForm> {
       getStockProduct();
     } else if (widget.isAdd == true) {
       selectStatus = AppConst().statusList[0].status;
+      _dateController.text = datetimeNow.toStringDDMMYYYY();
     } else {
       print('Error');
     }
