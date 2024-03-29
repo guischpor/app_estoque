@@ -14,6 +14,7 @@ import 'package:app_estoque/presentation/presenter/widgets/custom_app_bar.dart';
 import 'package:app_estoque/presentation/presenter/widgets/validation_message.dart';
 import 'package:app_estoque/presentation/presenter/controllers/app_controller/app_controller.dart';
 
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
