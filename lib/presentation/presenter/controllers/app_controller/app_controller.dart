@@ -46,6 +46,7 @@ abstract class AppBase with Store {
         setCheckLogged(false);
       },
       (success) {
+        setCheckLogged(success);
         print(success);
       },
     );
